@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace CollectionsMasterConsoleUI
@@ -23,7 +24,7 @@ namespace CollectionsMasterConsoleUI
             Console.ReadLine();
             //this prints that last number in the array           
             Console.WriteLine($"The last number in this array is {numbers[numbers.Length - 1]}. Press any key to continue.");
-            Console.ReadLine();
+            Console.ReadLine(); // shorthand for [numbers.Length - 1] is [^1];
 
             Console.WriteLine("All Numbers of the original Array");
             //this calls another method and connects it to the array
@@ -102,7 +103,7 @@ namespace CollectionsMasterConsoleUI
             Console.ReadLine();
 
             //Connects to the method
-            Console.WriteLine("Do you know what I like? Even numbers. Lets get rid of those pesky oddy's");
+            Console.WriteLine("Do you know what I like? Odd numbers. Lets get rid of those pesky evens");
             Console.WriteLine("Press anything to keep going!");
             Console.ReadLine();
             OddKiller(numberList);
@@ -141,14 +142,8 @@ namespace CollectionsMasterConsoleUI
 
         private static void OddKiller(List<int> numberList) //This removes the odd numbers from the list
         {
-            for(int i = 0; i < numberList.Count; i++)//issues with this one.
-            {
-                if(numberList[i] % 2 != 0) //this should single out the odds
-                {
-                    numberList.Remove(numberList[i]);//this should remove those numbers
-                }
-            }
-        }
+          numberList.RemoveAll(i => i % 2 == 0);//this is a lamda. it will remove the evens. 
+        } // you have to add the return Linq. at the top!!! for thisa to work. 
 
         private static void NumberChecker(List<int> numberList, int searchNumber)//this makes sure the user input is valid
         {
@@ -179,6 +174,7 @@ namespace CollectionsMasterConsoleUI
             for(int i = 0; i < numbers.Length; i++)//for loop
             {
                 int rando = rng.Next(100);//this generates the numbers below 100
+                
                 numbers[i] = rando;//tjhis adds these numbers to the array
             }
         }        
